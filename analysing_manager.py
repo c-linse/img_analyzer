@@ -2,6 +2,7 @@ import sys
 sys.path.append('/Users/clinse/Documents/dev/python/image_scan/img_back')
 sys.path.append('/mnt/python/image_scan/img_back')
 import os
+import timeit
 from modules.obtain import ImgObtain
 from modules.preprocessing import PreProcessing
 from modules.mount import Mount
@@ -58,6 +59,8 @@ class AnalManager:
 if __name__ == "__main__":
     img_name = str(sys.argv[1])
     #img_name = 'my_new_img'
+    start_time = timeit.default_timer()
+    print(start_time)
     analysing = AnalManager(img_name)
     print(f"#" * 5 + "   Preparing environment   " + "#" * 5 + "\n")
    # analysing.prepare_environment()
@@ -69,3 +72,6 @@ if __name__ == "__main__":
          print(f"#"*5 + "   Mounting   " + "#"*5 + "\n")
          analysing.mount()
          analysing.examine_deeply()
+    end_time = timeit.default_timer()
+    print(end_time-start_time)
+

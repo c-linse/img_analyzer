@@ -6,7 +6,7 @@ class Mount:
     link_dir = "l"
     diff_dir_name = "diff"
     work_dir_name = "work"
-    merged_dir_name = "merged"
+    merged_dir_name = "merged/"
     lower_file = "lower"
     overlay_path = "/var/lib/docker/overlay2/"
     overlay_name = "overlay"

@@ -23,8 +23,10 @@ class Scan:
             for dir in self.target_list:
                 if dir is '/':
                     for target_root in self.get_root_diff():
-                        os.system(f"find {mount.overlay_mount_path + '/' + target_root} -type f -iname '*' -exec grep -HIr -- '{prefix}' "'{}'" \;")
+                        #print(f"search in root {mount.overlay_mount_path + target_root}")
+                        os.system(f"find {mount.overlay_mount_path + target_root} -type f -iname '*' -exec grep -HIr -- '{prefix}' "'{}'" \;")
                 else:
+                    #print(f"search in child {mount.overlay_mount_path + dir}")
                     os.system(f"find {mount.overlay_mount_path + dir} -type f -iname '*' -exec grep -HIr -- '{prefix}' "'{}'" \;")
 
     def scan_for_aws_key(self):
@@ -33,8 +35,10 @@ class Scan:
         for dir in self.target_list:
             if dir is '/':
                 for target_root in self.get_root_diff():
-                    os.system(f"find {mount.overlay_mount_path + '/' + target_root} -type f -iname '*' -exec grep -HIre '{aws_pattern}' "'{}'" \;")
+                    #print(f"search in root {mount.overlay_mount_path + target_root}")
+                    os.system(f"find {mount.overlay_mount_path + target_root} -type f -iname '*' -exec grep -HIre '{aws_pattern}' "'{}'" \;")
             else:
+                #print(f"search in child {mount.overlay_mount_path + dir}")
                 os.system(f"find {mount.overlay_mount_path + dir} -type f -iname '*' -exec grep -HIre '{aws_pattern}' "'{}'" \;")
 
     def get_root_diff(self):

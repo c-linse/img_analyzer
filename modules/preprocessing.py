@@ -50,6 +50,9 @@ class PreProcessing:
         if None in self.target_dirs:
             self.target_dirs.remove(None)
 
+        if './' in self.target_dirs:
+            self.target_dirs.remove('./')
+
     #   set targets for ADD and COPY
     def fetch_direct_copy_targets(self):
         self.workdir = '/'
@@ -110,7 +113,7 @@ class PreProcessing:
 
         examine_string = init_string[match.span()[0]:end_pos_cmd]
         if " " not in examine_string:
-            examine_string = "./"
+            examine_string = "/"
         else:
             space_pos = examine_string.find(" ")
             examine_string = examine_string[space_pos + 1:len(examine_string)]
@@ -128,6 +131,8 @@ class PreProcessing:
     #
     def examine_with_specific_option(self, option, pos):
         keygen_option_pos = self.img_meta.find(option, pos)
+        if keygen_option_pos is -1:
+            return self.workdir
         target_path = self.img_meta[keygen_option_pos:]
 
         #  find 'option' -> start at pos of len(option) and create a substring to whitespace
@@ -159,7 +164,6 @@ class PreProcessing:
             return self.workdir
         elif target_path[0] is not '/' and target_path[0] is not '.':
             return str((self.workdir + '/' + target_path).replace('//', '/'))
-
 
     @property
     def targets(self):
