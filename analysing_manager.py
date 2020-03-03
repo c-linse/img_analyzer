@@ -58,13 +58,12 @@ class AnalManager:
 
 if __name__ == "__main__":
     img_name = str(sys.argv[1])
-    #img_name = 'my_new_img'
     start_time = timeit.default_timer()
     print(start_time)
     analysing = AnalManager(img_name)
     print(f"#" * 5 + "   Preparing environment   " + "#" * 5 + "\n")
-   # analysing.prepare_environment()
-    print(f"#" * 5 + "   Preprocessing Image " +img_name + "   "+ "#" * 5 + "\n")
+    analysing.prepare_environment()
+    print(f"#" * 5 + "   Preprocessing Image " + img_name + "   " + "#" * 5 + "\n")
     analysing.preprocess()
 
     if analysing.necessary:

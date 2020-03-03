@@ -22,8 +22,6 @@ class ImgObtain:
     #   pull image
     def pull_image(self):
         if ':' in self.img_name:
-            #self.client.images.pull(self.img_name)
-            pass
+            self.client.images.pull(self.img_name)
         else:
-            pass
-            #self.client.images.pull(self.img_name + ':latest')
+            self.client.images.pull(self.img_name + ':latest')
